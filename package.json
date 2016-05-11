@@ -1,0 +1,27 @@
+{
+  "name": "authentication-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jstrother/authentication-practice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jstrother/authentication-practice/issues"
+  },
+  "homepage": "https://github.com/jstrother/authentication-practice#readme",
+  "dependencies": {
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.16",
+    "passport": "^0.3.2",
+    "passport-http": "^0.3.0"
+  }
+}
