@@ -2,7 +2,7 @@
 alias profile="source .bash_profile"
 
 # the following is an alias to run mongodb in authentication
-alias run-auth="mongod --dbpath=/c/Users/Jim/Projects/authentication-practice/mongo_data --nojournal --rest --httpinterface"
+alias run-auth="mongod --dbpath=/~/workspace/authentication-practice/mongo_data --nojournal --rest --httpinterface"
 
 # the following is an alias for npm start
 alias startjs="npm start"
