@@ -79,4 +79,5 @@ app.post('/users', jsonParser, function(req, res) {
 
 mongoose.connect('mongodb://localhost/auth').then(function() {
     app.listen(8080);
+    console.log('Listening on port 8080');
 });
