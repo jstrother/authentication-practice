@@ -1,5 +1,5 @@
 # the following sets up an alias for sourcing .bash_profile
-alias profile="source .bash_profile"
+alias profile="source .bash_profile && echo '.bash_profile updated'"
 
 # the following is an alias to run mongodb in authentication
 alias run-auth="mongod --dbpath=/~/workspace/authentication-practice/mongo_data --nojournal --rest --httpinterface"
@@ -21,3 +21,5 @@ alias ac="add && commit"
 alias push="git push origin master && status"
 # the following is an alias for pulling from git, and calling status after
 alias pull="git pull origin master && status"
+# the following is an alias for singly removing a file or folder from git
+alias remove="git rm -r $1"
