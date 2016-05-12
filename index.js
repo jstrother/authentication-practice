@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var User = require('./user-model');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var bcrypt = require('bcryptjs');
 
 var app = express();
 
@@ -60,20 +61,31 @@ app.post('/users', jsonParser, function(req, res) {
             message: 'Incorrect field length: password'
         });
     }
-
-    var user = new User({
-        username: username,
-        password: password
-    });
-
-    user.save(function(err) {
+    bcrypt.genSalt(10, function(err, salt) {
         if (err) {
             return res.status(500).json({
-                message: 'Internal server error'
+                message: "Internal server error"
             });
         }
-
-        return res.status(201).json({});
+        bcrypt.hash(password, salt, function(err, hash) {
+            if (err) {
+                return res.status(500).json({
+                    message: "Internal server error"
+                });
+            }
+            var user = new User({
+                username: username,
+                password: hash
+            });
+            user.save(function(err) {
+                if (err) {
+                    return res.status(500).json({
+                        message: "Internal server error"
+                    });
+                }
+                return res.status(201).json({});
+            });
+        });
     });
 });
 
