@@ -18,7 +18,8 @@ UserSchema.methods.validatePassword = function(password, callback) {
 		if (err) {
 			callback(err);
 			return;
-		};
+		}
+		callback(null, isValid);
 	});
 };
 
