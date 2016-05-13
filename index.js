@@ -85,6 +85,7 @@ app.post('/users', jsonParser, function(req, res) {
                 }
                 return res.status(201).json({});
             });
+                console.log(user);
         });
     });
 });
