@@ -13,7 +13,14 @@ var UserSchema = new mongoose.Schema({
     }
 });
 
-// UserSchema
+UserSchema.methods.validatePassword = function(password, callback) {
+	bcrypt.compare(password, this.password, function(err, isValid) {
+		if (err) {
+			callback(err);
+			return;
+		};
+	});
+};
 
 var User = mongoose.model('User', UserSchema);
 

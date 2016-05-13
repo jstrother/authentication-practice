@@ -4,12 +4,49 @@ var User = require('./user-model');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var bcrypt = require('bcryptjs');
+var passport = require('passport');
+var BasicStrategy = require('passport-http').BasicStrategy;
+
+var strategy = new BasicStrategy(function(username, password, callback) {
+    User.findOne({
+        username: username
+    }, function(err, user) {
+        if (err) {
+            callback(err);
+            return;
+        }
+        if (!user) {
+            return callback(null, false, {
+                message: "Incorrect username"
+            });
+        }
+        user.validatePassword(password, function(err, isValid) {
+            if (err) {
+                return callback(err);
+            }
+            if (!isValid) {
+                return callback(null, false, {
+                    message: "Incorrect password"
+                });
+            }
+            return callback(null, user);
+        });
+    });
+});
+
+passport.use(strategy);
 
 var app = express();
 
+var jsonParser = bodyParser.json();
+
 app.use(passport.initialize());
 
-var jsonParser = bodyParser.json();
+app.get('/hidden', passport.authenticate('basic', {session: false}), function(req, res) {
+    res.json({
+        message: "Luke... I am your father!"
+    });
+});
 
 app.post('/users', jsonParser, function(req, res) {
     if (!req.body) {
